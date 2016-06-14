@@ -1,0 +1,9 @@
+<div class="container row">
+    <h1><%= name %></h1>
+
+    <% fixtures.each do |params| %>
+      <hr>
+      <h2><%= params.first %></h2>
+      <%= erb :"#{ path }/_#{ name }.html", locals: { params: params.last } %>
+    <% end %>
+</div>
