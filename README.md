@@ -26,7 +26,7 @@ Add framework folders
 
 ## Usage
 
-Run `stylio` in your project folder to start the server.
+Run `bundle exec stylio` in your project folder to start the server.
 
 See (stylio-example)[http://github.com/substrakt/stylio-example] to see an example setup.
 
