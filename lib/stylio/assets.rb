@@ -1,4 +1,5 @@
 require 'sinatra'
+require 'sass'
 
 module Sinatra
   module Assets
@@ -20,10 +21,9 @@ module Sinatra
 
     def self.registered(app)
       app.helpers Assets::Helpers
-
       app.get "/assets/application.css" do
         content_type("text/css")
-        Sass::Engine.for_file(File.join(options.assets, "stylesheets", "application.scss"), {
+        Sass::Engine.for_file(File.join(settings.app_path, "assets", "stylesheets", "application.scss"), {
           cache: false,
           syntax: :scss,
           style: :compressed

@@ -45,7 +45,8 @@ module Stylio
     end
 
     get '/layouts' do
-      directories = Dir.entries(settings.layouts).select {|f| !File.directory? f}
+      layouts = File.join(settings.app_path, 'layouts')
+      directories = Dir.entries(layouts).select {|f| !File.directory? f}
       erb :layouts,
         locals: {
           layouts: directories
@@ -53,13 +54,14 @@ module Stylio
     end
 
     get '/layouts/:id' do
+
       name = params[:id]
-      path = File.join(settings.layouts, name)
-      original_file_name = File.join(path, "#{ name }.scss")
+      path = File.join(settings.app_path, 'layouts', name)
 
       erb :layout,
         locals: {
           name: name,
+          path: path
         }, layout: :styleguide
     end
 
