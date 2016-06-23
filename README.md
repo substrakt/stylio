@@ -1,6 +1,6 @@
 # Stylio
 
-Stylio is a Sinatra based frameowrk to make a living styleguide that can easily be ported into a Rails application.
+Stylio is a Sinatra based framework to make a living style guide that can easily be ported into a Rails application.
 
 Currently supports Sass and ERB
 
@@ -20,7 +20,7 @@ Or install it yourself as:
 
 `gem install stylio`
 
-Add framework folders
+Add the framework folders
 
 `mkdir components && mkdir layouts`
 
