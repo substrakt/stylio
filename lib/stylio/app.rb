@@ -54,15 +54,37 @@ module Stylio
     end
 
     get '/layouts/:id' do
-
       name = params[:id]
       path = File.join(settings.app_path, 'layouts', name)
 
-      erb :layout,
+      erb :styleguide, :layout => false do
+        erb :"#{path}/#{name}.html" do
+          "Yielded content"
+        end
+      end
+    end
+
+    get '/examples' do
+      examples = File.join(settings.app_path, 'examples')
+      directories = Dir.entries(examples).select {|f| !File.directory? f}
+      erb :examples,
         locals: {
-          name: name,
-          path: path
+          examples: directories
         }, layout: :styleguide
+    end
+
+    get '/examples/:id' do
+
+      name = params[:id]
+      layouts = File.join(settings.app_path, 'layouts')
+      path = File.join(settings.app_path, 'examples', name)
+      yaml = YAML.load_file(File.join(path, "#{ name }.yml"))
+
+      erb :styleguide, :layout => false do
+        erb :"#{layouts}/#{yaml['layout']}/#{yaml['layout']}.html", :layout => false do
+          erb :"#{path}/#{name}.html"
+        end
+      end
     end
 
     helpers do
