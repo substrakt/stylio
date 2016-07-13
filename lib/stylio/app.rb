@@ -67,9 +67,9 @@ module Stylio
 
     helpers do
       def render_component(name, key)
-        path = File.join(settings.components, name)
+        path = File.join(settings.app_path, 'components', name)
         yaml = YAML.load_file(File.join(path, "#{ name }.yml"))
-        erb :"../components/#{name}/_#{name}.html", locals: { params: yaml[key.to_s] }
+        erb :"#{path}/_#{name}.html", locals: { params: yaml[key.to_s] }
       end
     end
   end
