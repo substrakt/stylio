@@ -34,7 +34,7 @@ Stylesheets are added to the `assets/stylesheets` folder which you will need to 
 
 ## Adding components
 
-`mkdir COMPONENT_NAME` and then add two files in this folder:
+`mkdir components/COMPONENT_NAME` and then add two files in this folder:
 
 An erb partial `touch _COMPONENT_NAME.html.erb`
 A fixture file `touch COMPONENT_NAME.yml`
@@ -45,11 +45,22 @@ See (stylio-example)[http://github.com/substrakt/stylio-example] to see an examp
 
 ## Adding layouts
 
-`mkdir LAYOUT_NAME` and then add a file in this folder:
+`mkdir layouts/LAYOUT_NAME` and then add a file in this folder:
 
 An erb template `touch LAYOUT_NAME.html.erb`
 
-No parameters can be referenced on this page except for `<%= yield_example %>`. When moving to a Rails app, simply change `yield_example` to `yield`
+No parameters can be referenced on this page except for `<%= yield %>`.
+
+See (stylio-example)[http://github.com/substrakt/stylio-example] to see an example setup.
+
+## Adding examples
+
+`mkdir examples/EXAMPLE_NAME` and then add a file in this folder:
+
+An erb template `touch EXAMPLE_NAME.html.erb`
+and yaml file `touch EXAMPLE_NAME.yml`
+
+No parameters can be referenced on this page except for `<%= yield %>` and calling other components and the name of the yml data `<%= render_component 'component_name', :component_data %>`
 
 See (stylio-example)[http://github.com/substrakt/stylio-example] to see an example setup.
 
