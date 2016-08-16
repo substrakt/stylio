@@ -8,6 +8,10 @@ module Sinatra
         "<link href='/assets/application.css' rel='stylesheet' type='text/css' />"
       end
 
+      def js_link
+        "<script src='/assets/application.js' type='text/javascript'></script>"
+      end
+
       def image_link(file)
         "/assets/images/#{ file }"
       end
