@@ -53,6 +53,10 @@ No parameters can be referenced on this page except for `<%= yield %>`.
 
 See (stylio-example)[http://github.com/substrakt/stylio-example] to see an example setup.
 
+## Adding Javascripts
+
+You can use sprockets as normal. You should create an `application.js` file in the `assets` folder. This can use `require` directives as per sprockets. You may use CoffeeScript or JavaScript.
+
 ## Adding examples
 
 `mkdir examples/EXAMPLE_NAME` and then add a file in this folder:
