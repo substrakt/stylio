@@ -30,15 +30,6 @@ module Sinatra
         }).render
       end
 
-      app.get "/assets/application.js" do
-        content_type("text/js")
-        Sass::Engine.for_file(File.join(options.assets, "stylesheets", "application.scss"), {
-          cache: false,
-          syntax: :scss,
-          style: :compressed
-        }).render
-      end
-
       %w{jpg png}.each do |format|
         app.get "/assets/images/:image.#{format}" do |image|
           content_type("image/#{format}")
