@@ -10,6 +10,8 @@ args = ARGV.dup
 ARGV.clear
 command = args.shift.strip rescue 'help'
 
+Bundler.require :default
+
 Stylio::App.new
 Stylio::App.set :app_path, Dir.pwd
 Stylio::App.run!

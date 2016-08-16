@@ -1,11 +1,12 @@
 require 'sinatra'
 require 'yaml'
+require 'sprockets'
+require 'uglifier'
 
 module Stylio
   class App < Sinatra::Base
     enable :run
     register Sinatra::Assets
-    Bundler.require :default
 
     set :root, File.realpath(File.dirname(__FILE__))
     set :app_path, ''
@@ -14,9 +15,17 @@ module Stylio
     set :components, File.join(settings.app_path, 'components')
     set :layouts, File.join(settings.app_path, 'layouts')
     set :styles, File.join(settings.app_path, 'assets', 'stylesheets')
+    set :javascripts, Sprockets::Environment.new
+    settings.javascripts.append_path File.join(settings.app_path, 'javascripts')
+    settings.javascripts.js_compressor  = :uglify
 
     get '/' do
       erb :elements, layout: :styleguide
+    end
+
+    get "/assets/application.js" do
+      content_type "application/javascript"
+      settings.javascripts["application.js"]
     end
 
     get '/elements' do
