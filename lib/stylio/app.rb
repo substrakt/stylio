@@ -102,6 +102,11 @@ module Stylio
         yaml = YAML.load_file(File.join(path, "#{ name }.yml"))
         erb :"#{path}/_#{name}.html", locals: { params: yaml[key.to_s] }
       end
+
+      def render_yield(key)
+        path = File.join(settings.app_path, request.path_info)
+        erb :"#{path}/_#{key}.html"
+      end
     end
   end
 end
