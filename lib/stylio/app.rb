@@ -20,7 +20,7 @@ module Stylio
     settings.javascripts.js_compressor  = :uglify
 
     get '/' do
-      erb :elements, layout: :styleguide
+      redirect to('/elements')
     end
 
     get "/assets/application.js" do
@@ -29,7 +29,12 @@ module Stylio
     end
 
     get '/elements' do
-      erb :elements, layout: :styleguide
+      file = File.join(settings.app_path, 'elements')
+      if File.exist?("#{file}.erb")
+        erb :"#{file}", layout: :styleguide
+      else
+        erb :elements, layout: :styleguide
+      end
     end
 
     get '/components' do
