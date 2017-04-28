@@ -16,6 +16,7 @@ module Stylio
     set :layouts, File.join(settings.app_path, 'layouts')
     set :styles, File.join(settings.app_path, 'assets', 'stylesheets')
     set :javascripts, Sprockets::Environment.new
+    set :bind, '0.0.0.0'
     settings.javascripts.append_path 'assets/javascripts'
     settings.javascripts.js_compressor  = :uglify
 
