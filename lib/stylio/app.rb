@@ -29,6 +29,10 @@ module Stylio
       settings.javascripts["application.js"]
     end
 
+    get '/fonts/:file' do
+      File.read(File.join(settings.app_path, 'assets', 'fonts', params[:file]))
+    end
+
     get '/elements' do
       file = File.join(settings.app_path, 'elements')
       if File.exist?("#{file}.erb")
