@@ -34,7 +34,7 @@ Stylesheets are added to the `assets/stylesheets` folder which you will need to 
 
 ## Adding components
 
-`mkdir components/COMPONENT_NAME` and then add two files in this folder:
+`bundle exec stylio generate-component COMPONENT_NAME` which will add two files in this folder:
 
 An erb partial `touch _COMPONENT_NAME.html.erb`
 A fixture file `touch COMPONENT_NAME.yml`
