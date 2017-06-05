@@ -34,7 +34,7 @@ module Sinatra
         }).render
       end
 
-      %w{jpg png}.each do |format|
+      %w(jpg png).each do |format|
         app.get "/assets/images/:image.#{format}" do |image|
           content_type("image/#{format}")
           File.join(options.assets, "images", "#{image}.#{format}")

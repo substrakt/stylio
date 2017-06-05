@@ -5,13 +5,24 @@ $LOAD_PATH.unshift(lib) if File.directory?(lib) && !$LOAD_PATH.include?(lib)
 
 require 'bundler/setup'
 require 'stylio'
+require 'thor'
+require 'colorize'
 
-args = ARGV.dup
-ARGV.clear
-command = args.shift.strip rescue 'help'
+class StylioCLI < Thor
+  desc 'generate-component [NAME]', 'generate a component with NAME'
+  def generate_component(name)
+    require_relative '../lib/stylio/generators/component'
+    Stylio::Generators::Component.new(name).generate
+  end
 
-Bundler.require :default
+  desc 'up', 'start stylio on port 4567'
+  def up
+    puts 'Starting Stylio...'.green
+    Stylio::App.new
+    Stylio::App.set :app_path, Dir.pwd
+    Stylio::App.run!
+  end
+  default_task :up
+end
 
-Stylio::App.new
-Stylio::App.set :app_path, Dir.pwd
-Stylio::App.run!
+StylioCLI.start(ARGV)
