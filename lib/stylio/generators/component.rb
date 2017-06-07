@@ -1,7 +1,9 @@
 require 'colorize'
+require_relative 'generator'
+
 module Stylio
   module Generators
-    class Component
+    class Component < Generator
       attr_reader :name
 
       def initialize(name)
@@ -16,21 +18,18 @@ module Stylio
         end
       end
 
+      def create_stylesheet
+        create_directory('assets/stylesheets/2-components')
+        create_file("assets/stylesheets/2-components/#{name}.scss")
+        puts "! Don't forget to import your stylesheet.".red
+      end
+
       def generate
-        puts "Generating component with name #{name}".yellow
-        FileUtils::mkdir_p "components/#{name}"
-        puts "Created folder components/#{name}".green
-
-        File.open(fullpath('yml'), 'w') do |f|
-          f.write('')
-        end
-        puts "Created file #{fullpath('yml')}".green
-
-        File.open(fullpath('html.erb'), 'w') do |f|
-          f.write('')
-        end
-        puts "Created file #{fullpath('html.erb')}".green
-
+        puts "Generating component with name '#{name}'".yellow
+        create_directory "components/#{name}"
+        create_file(fullpath('yml'))
+        create_file(fullpath('html.erb'))
+        create_stylesheet
         puts "Generated component with name #{name}".green
       end
     end
