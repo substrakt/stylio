@@ -59,7 +59,7 @@ module Stylio
         locals: {
           name: name,
           path: path,
-          fixtures: YAML.load_file(File.join(path, "#{ name }.yml"))
+          fixtures: choose_fixture(path, name)
         }, layout: :styleguide
     end
 
@@ -106,11 +106,25 @@ module Stylio
       end
     end
 
+    def choose_fixture(path, name)
+      if File.exists?(File.join("#{path}/#{ name }.yml.erb"))
+        YAML.load(erb(:"#{path}/#{ name }.yml"))
+      else
+        YAML.load_file(File.join(path, "#{name}.yml"))
+      end
+    end
+
     helpers do
       def render_component(name, key)
         path = File.join(settings.app_path, 'components', name)
         yaml = YAML.load_file(File.join(path, "#{ name }.yml"))
-        erb :"#{path}/_#{name}.html", locals: { params: yaml[key.to_s] }
+        erb(:"#{path}/_#{name}.html", locals: { params: yaml[key.to_s] })
+      end
+      
+      def sub_component(name, key)
+        path = File.join(settings.app_path, 'components', name)
+        yaml = YAML.load_file(File.join(path, "#{ name }.yml"))
+        erb(:"#{path}/_#{name}.html", locals: { params: yaml[key.to_s] }).dump[1...-1].gsub('\n', '')
       end
 
       def render_yield(key)
