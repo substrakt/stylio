@@ -34,12 +34,7 @@ module Stylio
     end
 
     get '/elements' do
-      file = File.join(settings.app_path, 'elements')
-      if File.exist?("#{file}.erb")
-        erb :"#{file}", layout: :styleguide
-      else
-        erb :elements, layout: :styleguide
-      end
+      render_application_partial(:elements, layout: :styleguide)
     end
 
     get '/components' do
@@ -130,6 +125,15 @@ module Stylio
       def render_yield(key)
         path = File.join(settings.app_path, request.path_info)
         erb :"#{path}/_#{key}.html"
+      end
+
+      def render_application_partial(key, opts = {})
+        file = File.join(settings.app_path, 'stylio', key.to_s)
+        if File.exist?("#{file}.erb")
+          erb :"#{file}", opts
+        else
+          erb key, opts
+        end
       end
     end
   end
