@@ -38,11 +38,9 @@ module Stylio
     end
 
     get '/components' do
-      components = File.join(settings.app_path, 'components')
-      directories = Dir.entries(components).select {|f| !File.directory? f}
       erb :components,
         locals: {
-          components: directories
+          components: find_files('components')
         }, layout: :styleguide
     end
 
@@ -59,11 +57,9 @@ module Stylio
     end
 
     get '/layouts' do
-      layouts = File.join(settings.app_path, 'layouts')
-      directories = Dir.entries(layouts).select {|f| !File.directory? f}
       erb :layouts,
         locals: {
-          layouts: directories
+          layouts: find_files('layouts')
         }, layout: :styleguide
     end
 
@@ -79,11 +75,9 @@ module Stylio
     end
 
     get '/examples' do
-      examples = File.join(settings.app_path, 'examples')
-      directories = Dir.entries(examples).select {|f| !File.directory? f}
       erb :examples,
         locals: {
-          examples: directories
+          examples: find_files('examples')
         }, layout: :styleguide
     end
 
@@ -99,6 +93,12 @@ module Stylio
           erb :"#{path}/#{name}.html"
         end
       end
+    end
+
+    def find_files(type)
+      root_folder = File.join(settings.app_path, type)
+      directories = Dir.entries(root_folder).select {|f| !File.directory? f}
+      directories.sort
     end
 
     def choose_fixture(path, name)
