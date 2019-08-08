@@ -6,12 +6,12 @@ require 'stylio/version'
 Gem::Specification.new do |spec|
   spec.name          = "stylio"
   spec.version       = Stylio::VERSION
-  spec.authors       = ["Substrakt"]
-  spec.email         = ["dev@substrakt.com"]
+  spec.authors       = ["Substrakt Health"]
+  spec.email         = ["max@substrakthealth.com"]
 
   spec.summary       = %q{An independent living styleguide with simple Rails portability}
   spec.description   = %q{Let designers design with Rails in mind without the complication of having to learn or install Rails}
-  spec.homepage      = "http://github.com/substrakt/stylio"
+  spec.homepage      = "http://github.com/substrakt-health/stylio"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files -z`.split("\x0").reject { |f| f.match(%r{^(test|spec|features)/}) }
